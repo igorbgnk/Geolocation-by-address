@@ -35,9 +35,6 @@ let geoApp = new Vue({
         geocodeAddress: function () {
             var geocoder = new google.maps.Geocoder();
 
-            document.getElementById('submit').addEventListener('click', function () {
-
-            });
 
             var address = document.getElementById('address').value;
             geocoder.geocode({'address': address}, function (results, status) {
@@ -45,7 +42,7 @@ let geoApp = new Vue({
                     geoApp.latitude = results[0].geometry.location.lat();
                     geoApp.longitude = results[0].geometry.location.lng();
                 } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
+                    alert('Place does not exist or something is wrong with Geolocation: ' + status);
                 }
             });
         }
