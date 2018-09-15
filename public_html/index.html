@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Geolocation by address</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    </head>
+    <body>
+        <div id = "geolocation">
+            <p>Latitude: {{ latitude }}</p>
+            <p>Longitude: {{ longitude }}</p>
+            <input type="input" id="address" />
+            <button id="submit" @click="geocodeAddress">Proslijedi</button>
+        </div>
+
+
+        <script>
+
+function initMap() {
+
+    var geocoder = new google.maps.Geocoder();
+
+
+}
+
+
+let geoApp = new Vue({
+    el: '#geolocation',
+    data: {
+        latitude: 0,
+        longitude: 0
+    },
+    methods: {
+        geocodeAddress: function () {
+            var geocoder = new google.maps.Geocoder();
+
+            document.getElementById('submit').addEventListener('click', function () {
+
+            });
+
+            var address = document.getElementById('address').value;
+            geocoder.geocode({'address': address}, function (results, status) {
+                if (status === 'OK') {
+                    geoApp.latitude = results[0].geometry.location.lat();
+                    geoApp.longitude = results[0].geometry.location.lng();
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
+    }
+
+});
+
+
+
+
+
+        </script>  
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmBPd8NJq_CbslTbn0tnsoTr_wc1undmk&callback=initMap">
+        </script>
+
+
+    </body>
+</html>
